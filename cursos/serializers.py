@@ -21,6 +21,11 @@ class AvaliacaoSerializer(serializers.ModelSerializer):
             'ativo',
         )
 
+    def validate_avaliacao(self, value):
+        if value in range(1,6):
+            return value
+        else:
+            raise serializers.ValidationError('A avaliação não pode receber essa nota')
 class CursoSerializer(serializers.ModelSerializer):
     # Nested relationship
     # avaliacoes = AvaliacaoSerializer(many=True, read_only=True)
